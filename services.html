@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Our Services | SilverTech Industrial Services</title>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/css/materialize.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="icon" type="image/png" href="assets/favicon/favicon.png">
+    <style>
+        :root {
+            --primary-color: #003366;
+            --accent-color: #00A3E0;
+            --text-color: #333;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Open Sans', sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+
+        /* --- Dynamic Page Header --- */
+        .page-header {
+            background: linear-gradient(135deg, rgba(0, 51, 102, 0.95) 0%, rgba(0, 30, 60, 0.98) 100%),
+                url('https://images.unsplash.com/photo-1504917595217-d4dc5ebe6122?auto=format&fit=crop&w=1920&q=80') center/cover fixed;
+            padding: 140px 0 80px;
+            text-align: center;
+            color: white;
+            position: relative;
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            margin-bottom: -40px;
+        }
+
+        .page-header h1 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            font-size: 3.5rem;
+            margin-bottom: 20px;
+            letter-spacing: -1px;
+            text-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+            background: linear-gradient(to right, #ffffff, #a1c4fd);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .page-header p {
+            font-size: 1.3rem;
+            font-weight: 300;
+            opacity: 0.9;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* --- Service Rows --- */
+        .services-body {
+            padding: 60px 0 100px;
+        }
+
+        .service-row {
+            display: flex;
+            align-items: center;
+            gap: 80px;
+            margin-bottom: 120px;
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeUp 1s ease-out forwards;
+        }
+
+        .service-row:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .service-row:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes fadeUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .service-row.reverse {
+            flex-direction: row-reverse;
+        }
+
+        .service-text {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .service-media {
+            flex: 1;
+            position: relative;
+        }
+
+        /* Decorative Blob */
+        .service-media::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, var(--accent-color), var(--primary-color));
+            border-radius: 30px;
+            top: 20px;
+            left: 20px;
+            z-index: -1;
+            opacity: 0.2;
+            transition: transform 0.4s ease;
+        }
+
+        .service-row.reverse .service-media::before {
+            left: -20px;
+        }
+
+        .service-media:hover::before {
+            transform: translate(5px, 5px);
+        }
+
+        .service-media img {
+            width: 100%;
+            height: 350px;
+            object-fit: cover;
+            border-radius: 20px;
+            box-shadow: 0 20px 50px rgba(0, 51, 102, 0.2);
+            transition: transform 0.4s ease, box-shadow 0.4s ease;
+            display: block;
+        }
+
+        .service-row:hover .service-media img {
+            transform: scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 51, 102, 0.3);
+        }
+
+        .service-text h2 {
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 800;
+            color: var(--primary-color);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+
+        .service-text h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 4px;
+            background: var(--accent-color);
+            border-radius: 2px;
+        }
+
+        .service-text p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+            margin-bottom: 30px;
+        }
+
+        .service-icon {
+            font-size: 4rem;
+            background: linear-gradient(135deg, #00A3E0 0%, #003366 100%);
+            background-clip: text;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            display: inline-block;
+            margin-bottom: 10px;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
+        }
+
+        /* Services List */
+        .custom-list {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+            border-left: 5px solid var(--accent-color);
+        }
+
+        .custom-list li {
+            padding: 12px 0 12px 40px;
+            position: relative;
+            font-weight: 600;
+            color: #444;
+            font-size: 1.05rem;
+            border-bottom: 1px solid #f0f0f0;
+            transition: transform 0.3s ease;
+        }
+
+        .custom-list li:last-child {
+            border-bottom: none;
+        }
+
+        .custom-list li:hover {
+            transform: translateX(5px);
+            color: var(--primary-color);
+        }
+
+        .custom-list li::before {
+            content: "check_circle_outline";
+            font-family: 'Material Icons';
+            position: absolute;
+            left: 0;
+            top: 12px;
+            color: var(--accent-color);
+            font-size: 1.4rem;
+        }
+
+        @media (max-width: 992px) {
+            .page-header h1 {
+                font-size: 2.5rem;
+            }
+
+            .service-row,
+            .service-row.reverse {
+                flex-direction: column;
+                text-align: center;
+                gap: 40px;
+            }
+
+            .service-media::before {
+                display: none;
+            }
+
+            .service-text h2::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+
+            .custom-list li {
+                text-align: left;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navigation -->
+    <div class="navbar-fixed">
+        <nav>
+            <div class="nav-wrapper">
+                <a href="index.html" class="brand-logo left">
+                    <img src="assets/images/silvertech-logo-main.png" alt="SilverTech Logo">
+                </a>
+                <a href="#" data-target="mobile-nav" class="sidenav-trigger right">
+                    <i class="material-icons" style="color: var(--primary-color);">menu</i>
+                </a>
+                <ul class="right hide-on-med-and-down">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="services.html" class="active-link">Services</a></li>
+
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Mobile Navigation -->
+    <ul class="sidenav" id="mobile-nav">
+        <li>
+            <div class="user-view">
+                <div class="background blue darken-3"></div>
+                <img src="assets/images/silvertech-logo-icon.png" alt="SilverTech Logo" class="circle"
+                    style="background: white;">
+                <span class="white-text name" style="font-weight:700;">SilverTech</span>
+                <span class="white-text email">info@silvertech.co.in</span>
+            </div>
+        </li>
+        <li><a href="index.html"><i class="material-icons">home</i>Home</a></li>
+        <li><a href="services.html"><i class="material-icons">build</i>Services</a></li>
+
+        <li><a href="about.html"><i class="material-icons">info</i>About Us</a></li>
+        <li><a href="contact.html"><i class="material-icons">mail</i>Contact</a></li>
+    </ul>
+
+    <main>
+        <header class="page-header">
+            <div class="container">
+                <h1>Our Services</h1>
+                <p>Comprehensive Industrial Solutions for the Energy Sector</p>
+            </div>
+        </header>
+
+        <section class="container services-body">
+
+            <!-- Service 1: Storage Tank Maintenance -->
+            <div class="service-row">
+                <div class="service-text">
+                    <h2>Storage Tank Maintenance, Repair & Accessories</h2>
+                    <p>We offer end-to-end solutions to keep your storage units in peak operational condition, from
+                        structural repairs to the installation of critical components.</p>
+                    <ul class="custom-list">
+                        <li>Tank Inspection & Maintenance (Health Checks)</li>
+                        <li>Structural Repair Services (Shells, Roofs, Bottoms)</li>
+                        <li>Internal & External Painting (Protective Coatings)</li>
+                        <li>Supply & Installation of Tank Seals & Valves</li>
+                        <li>Roof Drain Hoses & Lightning Protection (Shunts)</li>
+                    </ul>
+                </div>
+                <div class="service-media">
+                    <img src="assets/images/service-storage-tank-maintenance.png" alt="Storage Tank Maintenance"
+                        class="z-depth-2">
+                    <div class="floating-badge">
+                        <div class="badge-icon"><i class="material-icons">verified</i></div>
+                        <div class="badge-text">
+                            <span class="badge-title">Asset Care</span>
+                            <span class="badge-sub">End-to-End Solutions</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 2: Specialized Inspection -->
+            <div class="service-row reverse">
+                <div class="service-text">
+                    <h2>Specialized Inspection & Pipeline Surveys</h2>
+                    <p>Using advanced diagnostic techniques, we monitor asset health and identify potential
+                        vulnerabilities before they become critical failures.</p>
+                    <ul class="custom-list">
+                        <li>Ultrasonic Inspection (Thickness Gauging)</li>
+                        <li>DCVG Survey (Pipeline Coating Analysis)</li>
+                        <li>Bell Hole Survey (Targeted Excavations)</li>
+                        <li>General Pipeline Maintenance & Monitoring</li>
+                        <li>Anti-corrosive Painting for Pipelines</li>
+                    </ul>
+                </div>
+                <div class="service-media">
+                    <img src="assets/images/service-pipeline-inspection.png" alt="Pipeline Inspection"
+                        class="z-depth-2">
+                    <div class="floating-badge">
+                        <div class="badge-icon"><i class="material-icons">analytics</i></div>
+                        <div class="badge-text">
+                            <span class="badge-title">Precision Data</span>
+                            <span class="badge-sub">Advanced Diagnostics</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service 3: Construction Services -->
+            <div class="service-row">
+                <div class="service-text">
+                    <h2>Construction & Civil Works</h2>
+                    <p>We provide the engineering excellence and skilled labor required for large-scale industrial
+                        development and infrastructure projects.</p>
+                    <ul class="custom-list">
+                        <li>Industrial Construction (Tanks & Infrastructure)</li>
+                        <li>Civil Engineering & Groundworks (Foundations, Bunds)</li>
+                        <li>Turnkey Projects (Design to Commissioning)</li>
+                        <li>Heavy-duty Industrial Foundations</li>
+                        <li>Project Management & Hand-over</li>
+                    </ul>
+                </div>
+                <div class="service-media">
+                    <img src="assets/images/service-civil-construction-works.png" alt="Construction Services"
+                        class="z-depth-2">
+                    <div class="floating-badge">
+                        <div class="badge-icon"><i class="material-icons">architecture</i></div>
+                        <div class="badge-text">
+                            <span class="badge-title">Civil Works</span>
+                            <span class="badge-sub">Turnkey Projects</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Why Partner With Us Section -->
+        <section class="container" style="padding-bottom: 80px;">
+            <div class="center-align" style="margin-bottom: 50px;">
+                <h2 style="font-weight: 800; color: #003366; font-size: 2.2rem; margin-bottom: 15px;">Why Partner With
+                    Us?</h2>
+                <div style="width: 60px; height: 4px; background: #00A3E0; margin: 0 auto; border-radius: 2px;"></div>
+            </div>
+
+            <div class="row">
+                <div class="col s12 m4">
+                    <div class="card-panel z-depth-1 hoverable"
+                        style="height: 100%; border-radius: 15px; padding: 30px 20px;">
+                        <div class="center-align" style="margin-bottom: 20px;">
+                            <i class="material-icons" style="font-size: 3rem; color: #00A3E0;">school</i>
+                        </div>
+                        <h5 class="center-align" style="font-weight: 700; color: #003366; margin-bottom: 15px;">
+                            Specialized Expertise</h5>
+                        <p class="center-align grey-text text-darken-2">Deep technical knowledge in tank integrity,
+                            pipeline surveys, and component installation.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card-panel z-depth-1 hoverable"
+                        style="height: 100%; border-radius: 15px; padding: 30px 20px;">
+                        <div class="center-align" style="margin-bottom: 20px;">
+                            <i class="material-icons" style="font-size: 3rem; color: #00A3E0;">health_and_safety</i>
+                        </div>
+                        <h5 class="center-align" style="font-weight: 700; color: #003366; margin-bottom: 15px;">Safety
+                            Focused</h5>
+                        <p class="center-align grey-text text-darken-2">Strict adherence to global safety protocols for
+                            all industrial and civil works.</p>
+                    </div>
+                </div>
+                <div class="col s12 m4">
+                    <div class="card-panel z-depth-1 hoverable"
+                        style="height: 100%; border-radius: 15px; padding: 30px 20px;">
+                        <div class="center-align" style="margin-bottom: 20px;">
+                            <i class="material-icons" style="font-size: 3rem; color: #00A3E0;">verified</i>
+                        </div>
+                        <h5 class="center-align" style="font-weight: 700; color: #003366; margin-bottom: 15px;">Reliable
+                            Results</h5>
+                        <p class="center-align grey-text text-darken-2">We use industry-standard methods (DCVG, Bell
+                            Hole) to provide actionable, data-driven results.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="grey lighten-4 black-text center-align cta-section">
+            <div class="container">
+                <h3>Ready to secure your industrial assets?</h3>
+                <a href="contact.html" class="btn-large white blue-text waves-effect waves-light">Contact Our
+                    Engineering Team Today</a>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="modern-footer">
+        <div class="container">
+            <div class="row">
+                <!-- Brand Column -->
+                <div class="col s12 m4">
+                    <div class="footer-logo">
+                        <h5>SilverTech</h5>
+                    </div>
+                    <p class="footer-desc">Pioneering Industrial Safety & Integrity Management since 2010. Industrial
+                        Excellence, Delivered.</p>
+                    <div class="footer-social">
+                        <a href="https://share.google/gog3N5cGCoS9EgUGl" target="_blank" class="social-btn"
+                            aria-label="Google Business Profile">
+                            <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M21.35,11.1H12.18V13.83H18.69C18.36,17.64 15.19,19.27 12.19,19.27C8.36,19.27 5,16.25 5,12C5,7.9 8.2,4.73 12.2,4.73C15.29,4.73 17.1,6.7 17.1,6.7L19,4.72C19,4.72 16.56,2 12.1,2C6.42,2 2.03,6.8 2.03,12C2.03,17.05 6.16,22 12.25,22C17.6,22 21.5,18.33 21.5,12.91C21.5,11.76 21.35,11.1 21.35,11.1V11.1Z" />
+                            </svg>
+                        </a>
+                        <a href="https://www.linkedin.com/company/silvertech-industrial-services/" target="_blank"
+                            class="social-btn" aria-label="LinkedIn">
+                            <svg style="width: 20px; height: 20px;" viewBox="0 0 24 24" fill="currentColor">
+                                <path
+                                    d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z" />
+                            </svg>
+                        </a>
+                        <a href="mailto:info@silvertech.co.in" class="social-btn" aria-label="Email">
+                            <i class="material-icons">email</i>
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Quick Links -->
+                <div class="col s12 m4">
+                    <h5 class="footer-heading">Quick Links</h5>
+                    <ul class="footer-links">
+                        <li><a href="index.html"><i class="material-icons">chevron_right</i> Home</a></li>
+                        <li><a href="services.html"><i class="material-icons">chevron_right</i> Services</a></li>
+                        <li><a href="clients.html"><i class="material-icons">chevron_right</i> Clients</a></li>
+                        <li><a href="about.html"><i class="material-icons">chevron_right</i> About Us</a></li>
+                        <li><a href="contact.html"><i class="material-icons">chevron_right</i> Contact</a></li>
+                    </ul>
+                </div>
+
+                <!-- Contact Info -->
+                <div class="col s12 m4">
+                    <h5 class="footer-heading">Contact Us</h5>
+                    <ul class="footer-contact">
+                        <li>
+                            <i class="material-icons">location_on</i>
+                            <span>Jaipur, Rajasthan, India</span>
+                        </li>
+                        <li>
+                            <i class="material-icons">phone</i>
+                            <span>+91 7850979627</span>
+                        </li>
+                        <li>
+                            <a href="mailto:info@silvertech.co.in"
+                                style="display: flex; align-items: flex-start; color: inherit;">
+                                <i class="material-icons">email</i>
+                                <span>info@silvertech.co.in</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="copyright">
+                    &copy; 2026 SilverTech Industrial Services. All rights reserved.
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('.sidenav').sidenav();
+        });
+    </script>
+</body>
+
+</html>
