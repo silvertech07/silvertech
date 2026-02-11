@@ -1,12 +1,12 @@
 // SilverTech Industrial Services - Main JavaScript File
 
-$(document).ready(function() {
+$(document).ready(function () {
   // Initialize Materialize components
   initializeMaterialize();
-  
+
   // Setup event listeners
   setupEventListeners();
-  
+
   // Show welcome message
   showWelcomeMessage();
 });
@@ -15,21 +15,37 @@ $(document).ready(function() {
  * Initialize all Materialize CSS components
  */
 function initializeMaterialize() {
-  // Initialize side navigation
-  $('.sidenav').sidenav();
-  
+  // Initialize side navigation with toggle logic
+  var sidenavElems = document.querySelectorAll('.sidenav');
+  var sidenavInstances = M.Sidenav.init(sidenavElems, {
+    edge: 'right', // Open from right side
+    onOpenStart: function () { $('.sidenav-trigger').addClass('is-active'); },
+    onCloseStart: function () { $('.sidenav-trigger').removeClass('is-active'); }
+  });
+
+  // Custom Toggle functionality for Floating Menu
+  $('.sidenav-trigger').off('click').on('click', function (e) {
+    var instance = M.Sidenav.getInstance($('.sidenav'));
+    if (instance.isOpen) {
+      e.preventDefault();
+      e.stopPropagation();
+      instance.close();
+    }
+    // If closed, default Materialize behavior handles opening
+  });
+
   // Initialize modals
   $('.modal').modal();
-  
+
   // Initialize dropdowns
   $('.dropdown-trigger').dropdown();
-  
+
   // Initialize tooltips
   $('.tooltipped').tooltip();
-  
+
   // Initialize form selects
   $('select').formSelect();
-  
+
   // Initialize carousel
   $('.carousel').carousel({
     indicators: true
@@ -42,7 +58,7 @@ function initializeMaterialize() {
 function setupEventListeners() {
   // Smooth scrolling for internal links
   setupSmoothScrolling();
-  
+
   // Scroll indicator click handler
   setupScrollIndicator();
 }
@@ -51,15 +67,15 @@ function setupEventListeners() {
  * Setup smooth scrolling for anchor links
  */
 function setupSmoothScrolling() {
-  $('a[href^="#"]').on('click', function(event) {
+  $('a[href^="#"]').on('click', function (event) {
     if (this.hash !== "") {
       event.preventDefault();
       var hash = this.hash;
-      
+
       // Animate scroll to target
       $('html, body').animate({
         scrollTop: $(hash).offset().top - 64 // Account for fixed navbar
-      }, 800, function() {
+      }, 800, function () {
         // Update URL hash after animation
         window.location.hash = hash;
       });
@@ -71,7 +87,7 @@ function setupSmoothScrolling() {
  * Setup scroll indicator functionality
  */
 function setupScrollIndicator() {
-  $('.scroll-indicator').on('click', function() {
+  $('.scroll-indicator').on('click', function () {
     $('html, body').animate({
       scrollTop: $('#intro').offset().top - 64
     }, 800);
@@ -99,7 +115,7 @@ function isInViewport(element) {
   var elementBottom = elementTop + element.outerHeight();
   var viewportTop = $(window).scrollTop();
   var viewportBottom = viewportTop + $(window).height();
-  
+
   return elementBottom > viewportTop && elementTop < viewportBottom;
 }
 
@@ -107,10 +123,10 @@ function isInViewport(element) {
  * Add scroll-based animations (optional enhancement)
  */
 function setupScrollAnimations() {
-  $(window).on('scroll', function() {
+  $(window).on('scroll', function () {
     // Add scroll-based animations here if needed
     // Example: Fade in elements when they come into view
-    $('.service-card').each(function() {
+    $('.service-card').each(function () {
       if (isInViewport($(this))) {
         $(this).addClass('animate-fade-in');
       }
@@ -126,9 +142,9 @@ function setupScrollAnimations() {
 function validateForm(formId) {
   var isValid = true;
   var form = $('#' + formId);
-  
+
   // Check required fields
-  form.find('input[required], textarea[required]').each(function() {
+  form.find('input[required], textarea[required]').each(function () {
     if ($(this).val().trim() === '') {
       $(this).addClass('invalid');
       isValid = false;
@@ -136,18 +152,18 @@ function validateForm(formId) {
       $(this).removeClass('invalid');
     }
   });
-  
+
   // Validate email format
-  form.find('input[type="email"]').each(function() {
+  form.find('input[type="email"]').each(function () {
     var email = $(this).val();
     var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    
+
     if (email && !emailRegex.test(email)) {
       $(this).addClass('invalid');
       isValid = false;
     }
   });
-  
+
   return isValid;
 }
 
@@ -179,7 +195,7 @@ function showLoading(message = 'Loading...') {
       </div>
     `);
   }
-  
+
   $('#loading-overlay').fadeIn(300);
 }
 
@@ -222,12 +238,12 @@ function showError(message) {
 function formatPhone(phone) {
   // Remove all non-digits
   var cleaned = phone.replace(/\D/g, '');
-  
+
   // Format Indian mobile number
   if (cleaned.length === 10) {
     return '+91 ' + cleaned.substring(0, 5) + ' ' + cleaned.substring(5);
   }
-  
+
   return phone; // Return original if not standard format
 }
 
@@ -240,7 +256,7 @@ function formatPhone(phone) {
 function debounce(func, wait) {
   var timeout;
   return function executedFunction(...args) {
-    var later = function() {
+    var later = function () {
       clearTimeout(timeout);
       func(...args);
     };
